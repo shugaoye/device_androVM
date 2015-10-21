@@ -22,7 +22,17 @@ PRODUCT_PROPERTY_OVERRIDES := \
     ro.ril.gprsclass=10 \
     wifi.interface=eth1
   
-LOCAL_KERNEL := device/androVM/vbox86/kernel-vbox86
+TARGET_KERNEL_SOURCE := kernel
+TARGET_KERNEL_CONFIG := vbox_defconfig
+TARGET_ARCH := x86
+
+PRODUCT_OUT ?= out/target/product/vbox86tp
+include $(TARGET_KERNEL_SOURCE)/AndroidKernel.mk
+
+.PHONY: $(TARGET_PREBUILT_KERNEL)
+
+#LOCAL_KERNEL := device/androVM/vbox86/kernel-vbox86
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
 
 PRODUCT_COPY_FILES := \
     frameworks/native/data/etc/android.hardware.location.gps.xml:system/etc/permissions/android.hardware.location.gps.xml \
@@ -42,6 +52,7 @@ PRODUCT_COPY_FILES := \
     device/androVM/vbox86/init.rc:root/init.rc \
     device/androVM/vbox86/init.vbox86.rc:root/init.vbox86.rc \
     device/androVM/vbox86/ueventd.vbox86.rc:root/ueventd.vbox86.rc \
+    device/androVM/vbox86/v86d:root/sbin/v86d \
     device/androVM/vbox86/init.androVM.sh:system/etc/init.androVM.sh \
     $(LOCAL_KERNEL):kernel \
     device/androVM/vbox86/dhcpcd.conf:system/etc/dhcpcd/dhcpcd.conf \
@@ -80,7 +91,6 @@ PRODUCT_PACKAGES += \
     Camera \
     camera.default \
     busybox \
-    v86d \
     tinyplay \
     tinycap \
     tinymix \

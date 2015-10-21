@@ -27,7 +27,7 @@ static const struct sensor_t sSensorList[] = {
         {"Acceleration sensor",
                 "androVM",
                 1, SENSORS_HANDLE_BASE+ID_A,
-                SENSOR_TYPE_ACCELEROMETER, MAX_RANGE_A, CONVERT_A, 0.57f, 2000,  { } },
+                SENSOR_TYPE_ACCELEROMETER, MAX_RANGE_A, CONVERT_A, 0.57f, 2000, 0, 0, { } },
 };
 
 static int open_sensors(const struct hw_module_t* module, const char* name,
